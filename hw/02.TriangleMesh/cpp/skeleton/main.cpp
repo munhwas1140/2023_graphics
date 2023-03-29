@@ -356,13 +356,8 @@ void render_object()
   if(g_mesh_type == kTriangleSoup) {
     glDrawArrays(GL_TRIANGLES, 0, g_num_position);
   } else {
-<<<<<<< HEAD
-    //glBindBuffer();
-    //glDrawElements();
-=======
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer);
-    glDrawElements(GL_TRIANGLES, 6 GL_UNSIGNED_BYTE, (void *)0);
->>>>>>> f09dd09608a1a45fdc52eaaed18e1d22cd352f6e
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, (void*)0);
   }
 
 
