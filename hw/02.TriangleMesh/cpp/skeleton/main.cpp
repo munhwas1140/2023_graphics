@@ -254,11 +254,13 @@ void update_buffer_objects()
 
     glBindBuffer(GL_ARRAY_BUFFER, color_buffer);
     glBufferData(GL_ARRAY_BUFFER, g_color_size, g_color_data, GL_STATIC_DRAW);
-
   }
 
   // IBO
   // ...
+  if(g_mesh_type == kVlistTriangles) {
+
+  }
 
 }
 
@@ -311,8 +313,12 @@ void render_object()
   // 현재 배열 버퍼에 있는 데이터를 버텍스 쉐이더 a_color에 해당하는 attribute와 연결
   glVertexAttribPointer(loc_a_color, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-
-  glDrawArrays(GL_TRIANGLES, 0, g_num_position);
+  if(g_mesh_model == kTriangleSoup) {
+    glDrawArrays(GL_TRIANGLES, 0, g_num_position);
+  } else {
+    glBindBuffer();
+    glDrawElements();
+  }
 
 
   // 정점 attribute 배열 비활성화
