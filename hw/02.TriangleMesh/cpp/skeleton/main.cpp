@@ -298,8 +298,8 @@ void update_buffer_objects()
   
   // IBO
   if(g_mesh_type == kVlistTriangles) {
-    glBindBuffer(GL_INDEX_ARRAY_BUFFER_BINDING, index_buffer);
-    glBufferData(GL_INDEX_ARRAY_BUFFER_BINDING, g_index_size, g_index_data, GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, g_index_size, g_index_data, GL_STATIC_DRAW);
   }
 }
 
@@ -363,7 +363,6 @@ void render_object()
   // 정점 attribute 배열 비활성화
   glDisableVertexAttribArray(loc_a_position);
   glDisableVertexAttribArray(loc_a_color);
-
   // 쉐이더 프로그램 사용해제
   glUseProgram(0);
 }
