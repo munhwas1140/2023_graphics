@@ -1,5 +1,4 @@
 #include <iostream>
-
 // include glm
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -27,7 +26,7 @@ void glm_vec_test() {
   std::cout << "glm vector test" << std::endl;
   std::cout << "---------------" << std::endl;
   
-  glm::vec3 x;
+  glm::vec3 x(3.0f, 5.0f, 7.0f);
   glm::vec3 y;
   glm::vec3 z;
   float dot;
@@ -36,17 +35,23 @@ void glm_vec_test() {
   std::cout << "x = " << x << std::endl; 
 
   // TODO 2)
+  y = x;
   std::cout << "y = " << y << std::endl; 
 
   // TODO 3)
+  y += x;
   std::cout << "y += x" << std::endl;
   std::cout << "y => " << y << std::endl;
   std::cout << "x => " << x << std::endl;
 
   // TODO 4)
+  dot = glm::dot(x, y);
   std::cout << "dot(x,y) => " << dot << std::endl;
 
   // TODO 5)
+  x = glm::vec3(1.0f, 0.0f, 0.0f);
+  y = glm::vec3(0.0f ,1.0f ,0.0f);
+  z = glm::cross(x, y);
   std::cout << "reset x as [1, 0, 0]" << std::endl;
   std::cout << "reset y as [0, 1, 0]" << std::endl;
   std::cout << "z = cross(x, y)" << std::endl;
@@ -59,7 +64,7 @@ void glm_mat_test() {
   std::cout << "glm matrix test" << std::endl;
   std::cout << "---------------" << std::endl;
 
-  glm::mat4 A;
+  glm::mat4 A(1.0f);
   glm::mat4 B;
 
   // TODO 6) construct identity matrix
@@ -67,11 +72,15 @@ void glm_mat_test() {
 
   // TODO 7)
   // Notice: The matrix is column major
-
+  A[0] = glm::vec4(1.0f, 2.0f, 3.0f, 0.0f);
+  A[1] = glm::vec4(2.0f, 1.0f, -2.0f, 0.0f);
+  A[2] = glm::vec4(-1.0f, 0.0f, 1.0f, 0.0f);
+  A[3] = glm::vec4(-1.0f, 2.0f, 4.0f, 1.0f);
   std::cout << "A = " << std::endl;
   std::cout << A << std::endl;  
 
   // TODO 8)
+  B = glm::transpose(A);
   std::cout << "B = A^T" << std::endl;
   std::cout << "B = " << std::endl;
   std::cout << B << std::endl;
@@ -107,6 +116,16 @@ void glm_transform_test() {
   glm::mat4 mat_Perspective;
   
   // TODO 9)
+
+  glm::mat4 model(1.0f);
+
+  mat_Translate = glm::translate(model, glm::vec3(1, -1, 2));
+  mat_Rotate = glm::rotate(model, glm::radians(90.f), glm::vec3(1, 2, -1));
+  mat_Scale = glm::scale(model, glm::vec3(2.0f, 1.0f, 1.5f));
+  mat_LookAt = glm::lookAt(glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // eye, tar, up
+  mat_Ortho = glm::ortho(1.0f, -1.0f, 1.0f, -1.0f, 1.0f, -1.0f);
+  mat_Frustum = glm::frustum(-0.1f, 0.1f, -0.1f, 0.1f, 0.1f, 1000.0f);
+  mat_Perspective = glm::perspective(glm::radians(60.0f), 1.0f, 0.001f, 10000.0f);
 
   // DO NOT EDIT below this line
   std::cout << "Translation matrix" << std::endl;
