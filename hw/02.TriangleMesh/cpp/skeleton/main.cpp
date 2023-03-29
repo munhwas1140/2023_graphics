@@ -214,7 +214,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void update_buffer_objects()
 {
-	std::cout << g_mesh_model << ' ' << g_mesh_type << '\n';
   /////////////////////////////////////////////////////////////////////
   /// TODO: 아래 코드를 적절히 수정하여 프로그램을 완성하시오.
   /////////////////////////////////////////////////////////////////////
@@ -356,9 +355,8 @@ void render_object()
   if(g_mesh_type == kTriangleSoup) {
     glDrawArrays(GL_TRIANGLES, 0, g_num_position);
   } else {
-    glDrawArrays(GL_TRIANGLES,0,g_num_index);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, (void*)0);
+    glDrawElements(GL_TRIANGLES, g_num_index, GL_UNSIGNED_INT, 0);
   }
 
 
