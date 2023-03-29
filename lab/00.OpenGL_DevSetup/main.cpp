@@ -15,7 +15,7 @@ int main(void)
     return -1;
 
   // Create a GLFW window containing a OpenGL context
-  window = glfwCreateWindow(500, 500, "Hello OpenGL", NULL, NULL);
+  window = glfwCreateWindow(300, 300, "Hello munhwas1140!", NULL, NULL);
   if (!window)
   {
     glfwTerminate();
