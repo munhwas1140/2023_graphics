@@ -314,11 +314,11 @@ void render_object()
   // 현재 배열 버퍼에 있는 데이터를 버텍스 쉐이더 a_color에 해당하는 attribute와 연결
   glVertexAttribPointer(loc_a_color, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-  if(g_mesh_model == kTriangleSoup) {
+  if(g_mesh_type == kTriangleSoup) {
     glDrawArrays(GL_TRIANGLES, 0, g_num_position);
   } else {
-    glBindBuffer();
-    glDrawElements();
+    //glBindBuffer();
+    //glDrawElements();
   }
 
 
