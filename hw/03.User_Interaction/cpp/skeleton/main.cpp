@@ -183,10 +183,17 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     g_vec_model_translate[0] += 0.1f;
   
   // TODO
+  if (key == GLFW_KEY_J && action == GLFW_PRESS) 
+    g_vec_model_translate[0] -= 0.1f; // Down
+  // mode right
+  if (key == GLFW_KEY_K && action == GLFW_PRESS)
+    g_vec_model_translate[0] += 0.1f; // Up
 
   // scale
   if (key == GLFW_KEY_EQUAL && action == GLFW_PRESS)
     g_vec_model_scale += 0.1f;
+  if (key == GLFW_KEY_MINUS && action == GLFW_PRESS)
+    g_vec_model_scale -= 0.1f;
   
   // TODO
 }
