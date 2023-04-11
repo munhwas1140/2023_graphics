@@ -43,7 +43,7 @@ void init_shader_program();
 ////////////////////////////////////////////////////////////////////////////////
 /// 변환 관련 변수 및 함수
 ////////////////////////////////////////////////////////////////////////////////
-glm::mat4   g_mat_model = glm::mat4(1.f) , g_mat_view, g_mat_proj;
+glm::mat4   g_mat_model, g_mat_view, g_mat_proj;
 
 // model transformation
 glm::vec3   g_vec_model_translate;  // T
@@ -202,20 +202,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     g_vec_model_translate[0] += 0.1f;
   
   // TODO
-<<<<<<< HEAD
-  if (key == GLFW_KEY_J && action == GLFW_PRESS) 
-    g_vec_model_translate[0] -= 0.1f; // Down
-  // mode right
-  if (key == GLFW_KEY_K && action == GLFW_PRESS)
-    g_vec_model_translate[0] += 0.1f; // Up
-=======
   // mode down
   if (key == GLFW_KEY_J && action == GLFW_PRESS) 
     g_vec_model_translate[1] -= 0.1f;
   // mode up 
   if (key == GLFW_KEY_K && action == GLFW_PRESS)
     g_vec_model_translate[1] += 0.1f;
->>>>>>> d0c68bb2e1ac7e474973a09b13b86aaddc1c0014
 
   // scale
   if (key == GLFW_KEY_EQUAL && action == GLFW_PRESS)
@@ -349,13 +341,21 @@ void set_transform()
   g_mat_proj = glm::perspective(glm::radians(g_fovy), g_aspect, 0.001f, 1000.f);
   
   // TODO: erase the following line and write your codes to properly set g_mat_model as T*R*S
-  g_mat_model = glm::translate(glm::mat4(1.f), g_vec_model_translate);
 
-//  glm::mat4 T1 = glm::translate(glm::mat4(1.f), glm::vec3(g_mat_model[0][3], g_mat_model[1][3], g_mat_model[2][3]));
-//  glm::mat4 T2 = glm::translate(glm::mat4(1.f), glm::vec3(-g_mat_model[0][3], -g_mat_model[1][3], -g_mat_model[2][3]));
-
-  g_mat_model *=  glm::mat4_cast(g_quat_model_rotation);
-  g_mat_model *= glm::scale(glm::mat4(1.f), g_vec_model_scale) ;
+  glm::mat4 rot4x4 = glm::mat4_cast(g_quat_model_rotation);
+  glm::mat4 P = glm::mat4();
+  P[0][3] = g_mat_model[0][3];
+  P[1][3] = g_mat_model[1][3];
+  P[2][3] = g_mat_model[2][3];
+  for(int i = 0; i < 3; i++) {
+	  g_mat_model[i][3] = 0;
+  }
+  g_mat_model = glm::scale(g_vec_model_scale);
+  g_mat_model *= rot4x4;
+  for(int i = 0; i < 3; i++) {
+	  g_mat_model[i][3] += P[i][3];
+  }
+  g_mat_model *= glm::translate(g_vec_model_translate);
 }
 
 
